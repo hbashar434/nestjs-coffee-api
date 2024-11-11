@@ -8,6 +8,8 @@ import {
   Body,
   Query,
 } from '@nestjs/common';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('coffee')
 export class CoffeeController {
@@ -28,7 +30,7 @@ export class CoffeeController {
 
   // POST a new coffee
   @Post()
-  createCoffee(@Body() coffeeData: { name: string; flavor: string }) {
+  createCoffee(@Body() coffeeData: CreateCoffeeDto) {
     return {
       message: 'Coffee created successfully!',
       coffee: coffeeData,
@@ -37,10 +39,7 @@ export class CoffeeController {
 
   // PUT (update) a specific coffee by ID
   @Put(':id')
-  updateCoffee(
-    @Param('id') id: string,
-    @Body() updateData: { name?: string; flavor?: string },
-  ) {
+  updateCoffee(@Param('id') id: string, @Body() updateData: UpdateCoffeeDto) {
     return {
       message: `Coffee with ID ${id} updated successfully!`,
       updatedProperties: updateData,
