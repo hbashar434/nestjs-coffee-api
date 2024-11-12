@@ -10,20 +10,23 @@ import {
 } from '@nestjs/common';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
+import { CoffeeService } from './coffee.service';
 
 @Controller('coffee')
 export class CoffeeController {
+  // Recommended approach
+  constructor(private readonly coffeeService: CoffeeService) {}
 
-  
-
+  //Not recommended approach
+  // private coffeeService = new CoffeeService();
 
   // GET all coffees
   @Get()
   getCoffees(@Query('flavor') flavor?: string) {
-    if (flavor) {
-      return [{ property: `Coffees with flavor: ${flavor}` }];
-    }
-    return [{ property: 'Hello from coffee array!' }];
+    return this.coffeeService.getAllCoffees(flavor);
+
+    //Not recommended approach
+    // return this.coffeeService.getAllCoffees(flavor);
   }
 
   // GET a specific coffee by ID
