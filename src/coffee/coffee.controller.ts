@@ -32,7 +32,10 @@ export class CoffeeController {
   // GET a specific coffee by ID
   @Get(':id')
   getOneCoffee(@Param('id') id: string) {
-    return { id, property: 'Details of a specific coffee' };
+    return this.coffeeService.getCoffeeById(Number(id));
+
+    //Not recommended approach
+    // return this.coffeeService.getCoffeeById(Number(id));
   }
 
   // POST a new coffee
