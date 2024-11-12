@@ -24,41 +24,29 @@ export class CoffeeController {
   @Get()
   getCoffees(@Query('name') name?: string, @Query('flavor') flavor?: string) {
     return this.coffeeService.getAllCoffees(name, flavor);
-
-    //Not recommended approach
-    // return this.coffeeService.getAllCoffees(name, flavor);
   }
 
   // GET a specific coffee by ID
   @Get(':id')
   getOneCoffee(@Param('id') id: string) {
     return this.coffeeService.getCoffeeById(Number(id));
-
-    //Not recommended approach
-    // return this.coffeeService.getCoffeeById(Number(id));
   }
 
   // POST a new coffee
   @Post()
   createCoffee(@Body() coffeeData: CreateCoffeeDto) {
-    return {
-      message: 'Coffee created successfully!',
-      coffee: coffeeData,
-    };
+    return this.coffeeService.createCoffee(coffeeData);
   }
 
   // PUT (update) a specific coffee by ID
   @Put(':id')
   updateCoffee(@Param('id') id: string, @Body() updateData: UpdateCoffeeDto) {
-    return {
-      message: `Coffee with ID ${id} updated successfully!`,
-      updatedProperties: updateData,
-    };
+    return this.coffeeService.updateCoffee(Number(id), updateData);
   }
 
   // DELETE a specific coffee by ID
   @Delete(':id')
   deleteCoffee(@Param('id') id: string) {
-    return { message: `Coffee with ID ${id} deleted successfully!` };
+    return this.coffeeService.deleteCoffee(Number(id));
   }
 }

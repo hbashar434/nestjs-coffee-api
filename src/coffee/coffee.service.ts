@@ -1,4 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Injectable()
 export class CoffeeService {
@@ -61,5 +63,28 @@ export class CoffeeService {
       throw new NotFoundException(`Coffee with ID ${id} not found`);
     }
     return coffee;
+  }
+
+  // POST a new coffee
+  createCoffee(coffeeData: CreateCoffeeDto) {
+    const newCoffee = { id: Date.now(), ...coffeeData };
+    this.coffees.push(newCoffee);
+    return newCoffee;
+  }
+
+  // PUT (update) a specific coffee by ID
+  updateCoffee(id: number, updateData: UpdateCoffeeDto) {
+    const coffee = this.getCoffeeById(id);
+    Object.assign(coffee, updateData);
+    return coffee;
+  }
+
+  // DELETE a specific coffee by ID
+  deleteCoffee(id: number) {
+    const index = this.coffees.findIndex((coffee) => coffee.id === id);
+    if (index === -1) {
+      throw new NotFoundException(`Coffee with ID ${id} not found`);
+    }
+    return this.coffees.splice(index, 1);
   }
 }
