@@ -42,13 +42,16 @@ export class CoffeeService {
   ];
 
   // Method to fetch all coffees, with optional filtering by flavor
-  getAllCoffees(flavor?: string) {
-    if (flavor) {
-      return this.coffees.filter((coffee) =>
-        coffee.flavor.toLowerCase().includes(flavor.toLowerCase()),
-      );
-    }
-    return this.coffees;
+  getAllCoffees(name?: string, flavor?: string) {
+    return this.coffees.filter((coffee) => {
+      const matchesName = name
+        ? coffee.name.toLowerCase().includes(name.toLowerCase())
+        : true;
+      const matchesFlavor = flavor
+        ? coffee.flavor.toLowerCase().includes(flavor.toLowerCase())
+        : true;
+      return matchesName && matchesFlavor;
+    });
   }
 
   // Method to fetch a single coffee by ID

@@ -22,11 +22,11 @@ export class CoffeeController {
 
   // GET all coffees
   @Get()
-  getCoffees(@Query('flavor') flavor?: string) {
-    return this.coffeeService.getAllCoffees(flavor);
+  getCoffees(@Query('name') name?: string, @Query('flavor') flavor?: string) {
+    return this.coffeeService.getAllCoffees(name, flavor);
 
     //Not recommended approach
-    // return this.coffeeService.getAllCoffees(flavor);
+    // return this.coffeeService.getAllCoffees(name, flavor);
   }
 
   // GET a specific coffee by ID
