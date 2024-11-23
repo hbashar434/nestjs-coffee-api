@@ -9,37 +9,37 @@ export class CoffeeService {
       id: 1,
       name: 'Espresso',
       flavor: 'Rich and bold',
-      price: 3.5,
+      price: 1.99,
     },
     {
       id: 2,
       name: 'Latte',
       flavor: 'Smooth and creamy',
-      price: 4.5,
+      price: 2.49,
     },
     {
       id: 3,
       name: 'Cappuccino',
       flavor: 'Foamy with chocolate dust',
-      price: 4.0,
+      price: 2.99,
     },
     {
       id: 4,
       name: 'Mocha',
       flavor: 'Chocolatey and sweet',
-      price: 5.0,
+      price: 3.49,
     },
     {
       id: 5,
       name: 'Americano',
       flavor: 'Bold and strong',
-      price: 3.0,
+      price: 1.79,
     },
     {
       id: 6,
       name: 'Macchiato',
       flavor: 'Bold with a touch of milk',
-      price: 4.2,
+      price: 2.29,
     },
   ];
 
