@@ -9,10 +9,12 @@ import {
   Query,
   ParseIntPipe,
   ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { CoffeeService } from './coffee.service';
+import { AuthGuard } from 'src/guards/auth/auth.guard';
 
 @Controller('coffee')
 export class CoffeeController {
@@ -24,6 +26,7 @@ export class CoffeeController {
 
   // GET all coffees
   @Get()
+  @UseGuards(AuthGuard)
   getCoffees(@Query('name') name?: string, @Query('flavor') flavor?: string) {
     return this.coffeeService.getAllCoffees(name, flavor);
   }
