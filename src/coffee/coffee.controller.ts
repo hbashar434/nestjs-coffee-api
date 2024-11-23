@@ -8,6 +8,7 @@ import {
   Body,
   Query,
   ParseIntPipe,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -35,7 +36,7 @@ export class CoffeeController {
 
   // POST a new coffee
   @Post()
-  createCoffee(@Body() coffeeData: CreateCoffeeDto) {
+  createCoffee(@Body(new ValidationPipe()) coffeeData: CreateCoffeeDto) {
     return this.coffeeService.createCoffee(coffeeData);
   }
 
