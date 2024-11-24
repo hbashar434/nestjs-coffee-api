@@ -11,6 +11,12 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class ResponseInterceptor<T> implements NestInterceptor<T, any> {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const skipInterceptor = this.getSkipInterceptorMetadata(context);
+
+    if (skipInterceptor) {
+      return next.handle();
+    }
+
     return next.handle().pipe(
       map((data) => ({
         statusCode: context.switchToHttp().getResponse().statusCode,
@@ -39,5 +45,10 @@ export class ResponseInterceptor<T> implements NestInterceptor<T, any> {
         return throwError(() => error);
       }),
     );
+  }
+
+  private getSkipInterceptorMetadata(context: ExecutionContext): boolean {
+    const handler = context.getHandler();
+    return Reflect.getMetadata('skipInterceptor', handler) || false;
   }
 }
