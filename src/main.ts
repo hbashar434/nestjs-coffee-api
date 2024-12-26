@@ -15,6 +15,8 @@ async function bootstrap() {
     exclude: [{ path: '/', method: RequestMethod.GET }],
   });
 
+  console.log('process.env.PORT', process.env.PORT);
+
   const config = new DocumentBuilder()
     .setTitle('Cats example')
     .setDescription('The cats API description')
